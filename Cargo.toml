@@ -1,0 +1,45 @@
+[package]
+name = "pvm"
+version = "0.1.0"
+edition = "2021"
+description = "PHP Version Management - Fast PHP version switching for Windows"
+license = "MIT"
+authors = ["MaxM"]
+
+[dependencies]
+# CLI
+clap = { version = "4.5", features = ["derive"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.8"
+
+# Windows-specific
+winreg = "0.55"
+
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.58", features = [
+    "Win32_Foundation",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_System_Threading"
+]}
+
+# Network
+reqwest = { version = "0.12", features = ["blocking", "stream"] }
+
+# File handling
+zip = "2.2"
+
+# UX
+colored = "2.2"
+indicatif = "0.17"
+
+# Utilities
+semver = "1.0"
+directories = "5.0"
+thiserror = "2.0"
+anyhow = "1.0"
+
+[[bin]]
+name = "pvm"
+path = "src/main.rs"
